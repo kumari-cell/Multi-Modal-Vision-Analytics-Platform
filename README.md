@@ -64,3 +64,5 @@ source venv/bin/activate
 # 3. Upgrade local pipeline managers and install required dependencies
 pip install --upgrade pip
 pip install numpy pandas tensorflow matplotlib scikit-learn opencv-python customtkinter librosa
+## 6. Verification and Shareable Notebook Access Links
+- **Interactive Model Training Jupyter Notebook Source:** [Google Colab Shared Link](https://colab.research.google.com/drive/1lQqpb92FhTj9IyhLAIRFIa6SxVWDOaAY?usp=sharing).
