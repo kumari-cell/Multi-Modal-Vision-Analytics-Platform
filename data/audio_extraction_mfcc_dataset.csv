@@ -1,0 +1,5 @@
+audio_sample_path,extracted_mfcc_mean_1,extracted_mfcc_mean_2,extracted_mfcc_mean_3,extracted_mfcc_mean_4,extracted_mfcc_mean_5,extracted_mfcc_mean_6,extracted_mfcc_mean_7,extracted_mfcc_mean_8,extracted_mfcc_mean_9,extracted_mfcc_mean_10,extracted_mfcc_mean_11,extracted_mfcc_mean_12,extracted_mfcc_mean_13,calculated_vocal_pitch_hz,target_gender_label
+dataset_repository/native_speakers/male_sample_01.wav,-240.54,120.32,-15.43,24.11,5.32,-12.45,8.23,-3.12,6.54,-4.32,2.11,-1.05,3.42,115.42,0
+dataset_repository/native_speakers/male_sample_02.wav,-255.12,115.65,-12.87,22.43,7.12,-10.54,6.87,-5.21,4.32,-2.11,1.87,-2.14,2.98,122.15,0
+dataset_repository/native_speakers/female_sample_01.wav,-180.23,85.43,15.12,-5.32,-12.43,2.11,-8.54,4.32,-10.12,6.43,-5.12,4.87,-3.21,210.65,1
+dataset_repository/native_speakers/female_sample_02.wav,-192.45,90.12,12.65,-7.87,-10.54,4.32,-6.12,2.98,-12.43,4.11,-7.32,5.12,-1.45,225.84,1

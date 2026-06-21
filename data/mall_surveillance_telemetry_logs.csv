@@ -1,0 +1,4 @@
+Camera_Node_Identifier,Detected_Faces_Count,Senior_Citizen_Badge_Triggered,Logging_Timestamp_Format
+CAM_NODE_MALL_ENTRANCE_01,3,Yes,2026-06-21 14:12:05
+CAM_NODE_MALL_CENTRAL_04,1,No,2026-06-21 14:15:32
+CAM_NODE_MALL_EXIT_02,5,Yes,2026-06-21 14:22:18
