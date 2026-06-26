@@ -383,8 +383,7 @@ class MainApplication(ctk.CTk):
         ctk.set_appearance_mode(THEME_MODE)
         ctk.set_default_color_theme(THEME_ACCENT)
         self.title(APP_TITLE)
-        self.geometry(WINDOW_SIZE)
-        self.resizable(False, False)
+        self.state('zoomed')
 
         # Shared states
         self._running = True
@@ -487,11 +486,11 @@ class MainApplication(ctk.CTk):
     def _build_tab1(self) -> None:
         parent = self._tabs.tab("Tab 1: Car Color")
         left_col = ctk.CTkFrame(parent, fg_color="transparent")
-        right_col = ctk.CTkFrame(parent, width=290,
+        right_col = ctk.CTkScrollableFrame(parent, width=290,
                                  fg_color=("#161625", "#161625"), corner_radius=10)
         left_col.pack(side="left", fill="both", expand=True, padx=(8, 4), pady=8)
         right_col.pack(side="right", fill="y", padx=(4, 8), pady=8)
-        right_col.pack_propagate(False)
+       
 
         ctk.CTkLabel(left_col, text="▶ LIVE / IMAGE FEED",
                      font=ctk.CTkFont("Consolas", 13, "bold"),
@@ -655,11 +654,11 @@ class MainApplication(ctk.CTk):
     def _build_tab2(self) -> None:
         parent = self._tabs.tab("Tab 2: Sign Language")
         left_col = ctk.CTkFrame(parent, fg_color="transparent")
-        right_col = ctk.CTkFrame(parent, width=290,
+        right_col = ctk.CTkScrollableFrame(parent, width=290,
                                  fg_color=("#161625", "#161625"), corner_radius=10)
         left_col.pack(side="left", fill="both", expand=True, padx=(8, 4), pady=8)
         right_col.pack(side="right", fill="y", padx=(4, 8), pady=8)
-        right_col.pack_propagate(False)
+       
 
         ctk.CTkLabel(left_col, text="✋ GESTURE RECOGNITION FEED",
                      font=ctk.CTkFont("Consolas", 13, "bold"),
@@ -937,19 +936,26 @@ class MainApplication(ctk.CTk):
     def _build_tab3(self) -> None:
         parent = self._tabs.tab("Tab 3: Nationality")
         left_col = ctk.CTkFrame(parent, fg_color="transparent")
-        right_col = ctk.CTkFrame(parent, width=340,
+        right_col = ctk.CTkScrollableFrame(parent, width=340,
                                  fg_color=("#161625", "#161625"), corner_radius=10)
         left_col.pack(side="left", fill="both", expand=True, padx=(8, 4), pady=8)
         right_col.pack(side="right", fill="y", padx=(4, 8), pady=8)
-        right_col.pack_propagate(False)
+        
 
+        # 1. HEADER LABEL
         ctk.CTkLabel(left_col, text="🌍 NATIONALITY & EMOTION PROFILER",
                      font=ctk.CTkFont("Consolas", 13, "bold"),
                      text_color="#4fc3f7").pack(anchor="w", padx=6, pady=(4, 2))
-        self._t3_canvas = ctk.CTkCanvas(left_col, bg="#0d0d1a",
-                                        highlightthickness=0, width=760, height=480)
-        self._t3_canvas.pack(fill="both", expand=True, padx=4, pady=(0, 4))
 
+        # 2. UPLOAD BUTTON 
+        self._t3_btn_upload = ctk.CTkButton(
+            left_col, text="📂 Upload Target Image",
+            fg_color="#0d47a1", hover_color="#1565c0",
+            font=ctk.CTkFont("Consolas", 12, "bold"),
+            command=self._t3_upload_image)
+        self._t3_btn_upload.pack(fill="x", padx=4, pady=6)
+
+        # 3. STATS STRIP
         strip = ctk.CTkFrame(left_col, height=34, fg_color="#0d0d1a", corner_radius=6)
         strip.pack(fill="x", padx=4, pady=(0, 4))
         strip.pack_propagate(False)
@@ -958,13 +964,12 @@ class MainApplication(ctk.CTk):
                      font=ctk.CTkFont("Consolas", 11),
                      text_color="#80cbc4").pack(expand=True)
 
-        self._t3_btn_upload = ctk.CTkButton(
-            left_col, text="📂 Upload Target Image",
-            fg_color="#0d47a1", hover_color="#1565c0",
-            font=ctk.CTkFont("Consolas", 12, "bold"),
-            command=self._t3_upload_image)
-        self._t3_btn_upload.pack(fill="x", padx=4, pady=(0, 4))
+        # 4. BLACK CANVAS 
+        self._t3_canvas = ctk.CTkCanvas(left_col, bg="#0d0d1a",
+                                        highlightthickness=0, width=760, height=480)
+        self._t3_canvas.pack(fill="both", expand=True, padx=4, pady=(0, 4))
 
+        
         ctk.CTkLabel(right_col, text="PROFILE ANALYSIS",
                      font=ctk.CTkFont("Consolas", 14, "bold"),
                      text_color="#4fc3f7").pack(pady=(14, 2))
@@ -1129,30 +1134,38 @@ class MainApplication(ctk.CTk):
     def _build_tab4(self) -> None:
         parent = self._tabs.tab("Tab 4: Gender Swapper")
         left_col = ctk.CTkFrame(parent, fg_color="transparent")
-        right_col = ctk.CTkFrame(parent, width=330,
+        right_col = ctk.CTkScrollableFrame(parent, width=330,
                                  fg_color=("#161625", "#161625"), corner_radius=10)
         left_col.pack(side="left", fill="both", expand=True, padx=(8, 4), pady=8)
         right_col.pack(side="right", fill="y", padx=(4, 8), pady=8)
-        right_col.pack_propagate(False)
+       
 
+        # 1. HEADER LABEL
         ctk.CTkLabel(left_col, text="💇 HAIR-LENGTH GENDER SWAPPER — LIVE FEED",
                      font=ctk.CTkFont("Consolas", 13, "bold"),
                      text_color="#4fc3f7").pack(anchor="w", padx=6, pady=(4, 2))
-        self._t4_canvas = ctk.CTkCanvas(left_col, bg="#0d0d1a",
-                                        highlightthickness=0, width=760, height=478)
-        self._t4_canvas.pack(fill="both", expand=True, padx=4, pady=(0, 4))
+
+        # 2. BANNER STATUS LABEL
         self._t4_banner_var = ctk.StringVar(value="⏸ Camera inactive")
         self._t4_banner_lbl = ctk.CTkLabel(left_col, textvariable=self._t4_banner_var,
                                            font=ctk.CTkFont("Consolas", 13, "bold"),
                                            text_color="#78909c")
         self._t4_banner_lbl.pack(pady=(0, 4))
+
+        # 3. START CAMERA BUTTON (దీన్ని పైన పెట్టాం, కాబట్టి స్పష్టంగా కనిపిస్తుంది)
         self._t4_btn_webcam = ctk.CTkButton(
             left_col, text="📷 Start Camera",
             fg_color="#1b5e20", hover_color="#2e7d32",
             font=ctk.CTkFont("Consolas", 12, "bold"),
             command=self._t4_toggle_webcam)
-        self._t4_btn_webcam.pack(fill="x", padx=4, pady=(0, 4))
+        self._t4_btn_webcam.pack(fill="x", padx=4, pady=6)
 
+        # 4. LARGE DISPLAY CANVAS (బటన్ కిందకి మార్చాం)
+        self._t4_canvas = ctk.CTkCanvas(left_col, bg="#0d0d1a",
+                                        highlightthickness=0, width=760, height=478)
+        self._t4_canvas.pack(fill="both", expand=True, padx=4, pady=(0, 4))
+
+        # === [కింద ఉన్న PROFILE PARAMETERS కోడ్ అంతా సేమ్, మార్చొద్దు] ===
         ctk.CTkLabel(right_col, text="PROFILE PARAMETERS",
                      font=ctk.CTkFont("Consolas", 14, "bold"),
                      text_color="#4fc3f7").pack(pady=(14, 2))
@@ -1357,11 +1370,11 @@ class MainApplication(ctk.CTk):
     def _build_tab5(self) -> None:
         parent = self._tabs.tab("Tab 5: Voice Filter")
         left_col = ctk.CTkFrame(parent, fg_color="transparent")
-        right_col = ctk.CTkFrame(parent, width=320,
+        right_col = ctk.CTkScrollableFrame(parent, width=320,
                                  fg_color=("#161625", "#161625"), corner_radius=10)
         left_col.pack(side="left", fill="both", expand=True, padx=(8, 4), pady=8)
         right_col.pack(side="right", fill="y", padx=(4, 8), pady=8)
-        right_col.pack_propagate(False)
+        
 
         ctk.CTkLabel(left_col, text="🎙 VOICE NOTE SPECTRAL ANALYSER",
                      font=ctk.CTkFont("Consolas", 13, "bold"),
@@ -1570,11 +1583,11 @@ class MainApplication(ctk.CTk):
     def _build_tab6(self) -> None:
         parent = self._tabs.tab("Tab 6: Mall Tracker")
         left_col = ctk.CTkFrame(parent, fg_color="transparent")
-        right_col = ctk.CTkFrame(parent, width=310,
+        right_col = ctk.CTkScrollableFrame(parent, width=310,
                                  fg_color=("#161625", "#161625"), corner_radius=10)
         left_col.pack(side="left", fill="both", expand=True, padx=(8, 4), pady=8)
         right_col.pack(side="right", fill="y", padx=(4, 8), pady=8)
-        right_col.pack_propagate(False)
+       
 
         ctk.CTkLabel(left_col, text="🏬 MALL VISITOR SURVEILLANCE TRACKER",
                      font=ctk.CTkFont("Consolas", 13, "bold"),
